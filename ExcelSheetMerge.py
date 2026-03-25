@@ -12,7 +12,7 @@ from typing import Dict, List, Optional, Tuple
 import pandas as pd
 import tkinter as tk
 from openpyxl import Workbook, load_workbook
-from tkinter import filedialog, messagebox, ttk, simpledialog
+from tkinter import filedialog, messagebox, ttk
 from tkinter.scrolledtext import ScrolledText
 
 
@@ -269,20 +269,6 @@ def read_excel_data(
         wb.close()
 
 
-def detect_empty_and_error_issues(df, file_name, sheet_name):
-    empty, error = [], []
-    data_cols = [c for c in df.columns if c != "__source_row__"]
-    for _, row in df.iterrows():
-        src = row.get("__source_row__")
-        for col in data_cols:
-            v = row[col]
-            if is_empty_value(v):
-                empty.append({"file": file_name, "sheet": sheet_name, "row": src, "column": col})
-            elif is_excel_error_value(v):
-                error.append({"file": file_name, "sheet": sheet_name, "row": src, "column": col, "value": str(v)})
-    return empty, error
-
-
 def _check_rule(rule, value):
     """규칙 위반 시 기본 메시지를 반환, 위반 아니면 None"""
     empty = is_empty_value(value)
@@ -331,26 +317,6 @@ def _check_rule(rule, value):
         elif not (1 <= int(m.group(2)) <= 12 and 1 <= int(m.group(3)) <= 31):
             return f"유효하지 않은 날짜: {tv}"
     return None
-
-
-def validate_rules(df, rules, file_name, sheet_name):
-    """검증 이슈 리스트 반환"""
-    issues = []
-    if not rules:
-        return issues
-    for column, rule in rules.items():
-        if column not in df.columns:
-            issues.append({"file": file_name, "sheet": sheet_name, "row": "", "column": column,
-                           "message": "검증 대상 열이 파일에 없습니다."})
-            continue
-        for _, row in df.iterrows():
-            src = row.get("__source_row__", "")
-            default_msg = _check_rule(rule, row[column])
-            if default_msg:
-                msg = rule.error_msg if rule.error_msg else default_msg
-                issues.append({"file": file_name, "sheet": sheet_name, "row": src,
-                               "column": column, "message": msg})
-    return issues
 
 
 def validate_rules_by_row(df, rules):

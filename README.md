@@ -1,10 +1,17 @@
-# ExcelMerge - 엑셀 시트 병합 도구
+# ExcelSheetMerge - 엑셀 시트 병합 도구
 
 여러 엑셀 파일의 시트를 하나의 파일로 병합하고, 데이터 검증까지 동시에 수행하는 Windows GUI 도구입니다.
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows-0078D6)
 ![License](https://img.shields.io/badge/License-MIT-green)
+
+---
+
+## 다운로드
+
+[Releases](../../releases) 페이지에서 `ExcelMergeTool.exe`를 다운로드하세요.
+Python 설치 없이 바로 실행할 수 있습니다.
 
 ---
 
@@ -32,53 +39,10 @@
 | **정규식** | 사용자 지정 정규식 패턴 검증 |
 | **허용값 목록** | 지정된 값만 허용 |
 
-### 미리보기
-- 파일 선택 시 시트 내용을 테이블 형태로 미리보기
-- 우클릭 메뉴로 열 검증 규칙을 빠르게 추가/수정
-- 헤더 행 자동 설정 지원
-
-### 규칙 관리
-- 검증 규칙을 JSON 파일로 저장/불러오기
-- 개별 파일 또는 모든 파일에 규칙 일괄 적용
-- 파일별 독립적인 규칙 관리
-
 ### 기타
 - Windows 다크 모드 / 라이트 모드 자동 감지 및 테마 전환
 - 실행 로그로 병합 진행 상황 실시간 확인
-- 단일 EXE 파일로 빌드 가능 (설치 불필요 배포)
-
----
-
-## 설치 및 실행
-
-### 요구 사항
-- Python 3.9 이상
-- Windows 10 / 11
-
-### 1. 의존성 설치
-
-```powershell
-pip install -r requirements.txt
-```
-
-### 2. 프로그램 실행
-
-```powershell
-python app.py
-```
-
----
-
-## EXE 빌드 (설치 없이 배포)
-
-```powershell
-build_exe.bat
-```
-
-빌드가 완료되면 `dist\ExcelMergeTool.exe` 파일이 생성됩니다.
-이 파일 하나만 배포하면 Python 없이도 실행할 수 있습니다.
-
-> 빌드 스크립트는 의존성이 이미 설치되어 있으면 자동으로 건너뜁니다.
+- 검증 규칙 JSON 파일로 저장/불러오기
 
 ---
 
@@ -145,23 +109,6 @@ build_exe.bat
 | `.xltx` (템플릿) | O | X |
 | `.xltm` (매크로 템플릿) | O | X |
 | `.xls` (구형) | X | X |
-
----
-
-## 프로젝트 구조
-
-```
-ExcelMerge/
-├── app.py                  # 메인 애플리케이션 (GUI + 로직)
-├── requirements.txt        # Python 의존성
-├── build_exe.bat           # EXE 빌드 스크립트
-├── ExcelMergeTool.spec     # PyInstaller 빌드 설정
-├── Excel_Merge_ICON.ico    # 앱 아이콘
-├── Excel_Merge_ICON.png    # 앱 아이콘 (PNG)
-├── Excel_Merge_ICON.svg    # 앱 아이콘 (SVG 원본)
-└── dist/
-    └── ExcelMergeTool.exe  # 빌드된 실행 파일
-```
 
 ---
 
