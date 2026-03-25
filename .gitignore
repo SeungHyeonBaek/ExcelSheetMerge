@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+build/
+dist/
+*.xlsx
+*.xlsm
+~$*
+rule.json
+.claude/
+ExcelMergeTool.spec
+build_exe.bat
+requirements.txt
+Excel_Merge_ICON.*
